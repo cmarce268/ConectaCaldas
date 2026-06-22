@@ -7,6 +7,7 @@ import Profile from '../pages/Profile'
 import CreateService from '../pages/CreateService'
 import MyServices from '../pages/MyServices'
 import EditService from '../pages/EditService'
+import CreateRequest from '../pages/CreateRequest'
 
 function AppRoutes() {
   return (
@@ -19,6 +20,7 @@ function AppRoutes() {
         <Route path="/crear-servicio" element={<CreateService />} />
         <Route path="/mis-servicios" element={<MyServices />} />
         <Route path="/editar-servicio/:id" element={<EditService />} />
+        <Route path="/crear-solicitud" element={<CreateRequest />} />
       </Routes>
     </BrowserRouter>
   )
