@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { supabase } from '../services/supabase'
 
 function Register() {
-
   const [nombre, setNombre] = useState('')
   const [apellido, setApellido] = useState('')
   const [telefono, setTelefono] = useState('')
+  const [ciudad, setCiudad] = useState('Manizales')
+  const [barrio, setBarrio] = useState('')
   const [correo, setCorreo] = useState('')
   const [password, setPassword] = useState('')
   const [rol, setRol] = useState('cliente')
@@ -14,8 +15,6 @@ function Register() {
     e.preventDefault()
 
     try {
-
-      // 1. Crear usuario en Auth
       const { data, error } = await supabase.auth.signUp({
         email: correo,
         password: password,
@@ -28,7 +27,6 @@ function Register() {
 
       const user = data.user
 
-      // 2. Guardar datos adicionales
       const { error: errorUsuario } = await supabase
         .from('usuarios')
         .insert([
@@ -37,6 +35,8 @@ function Register() {
             nombre,
             apellido,
             telefono,
+            ciudad,
+            barrio,
             rol
           }
         ])
@@ -48,6 +48,15 @@ function Register() {
 
       alert('Usuario registrado correctamente')
 
+      setNombre('')
+      setApellido('')
+      setTelefono('')
+      setCiudad('Manizales')
+      setBarrio('')
+      setCorreo('')
+      setPassword('')
+      setRol('cliente')
+
     } catch (error) {
       console.log(error)
     }
@@ -55,16 +64,15 @@ function Register() {
 
   return (
     <div>
-
       <h1>Registro</h1>
 
       <form onSubmit={handleRegister}>
-
         <input
           type="text"
           placeholder="Nombre"
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
+          required
         />
 
         <br /><br />
@@ -74,6 +82,7 @@ function Register() {
           placeholder="Apellido"
           value={apellido}
           onChange={(e) => setApellido(e.target.value)}
+          required
         />
 
         <br /><br />
@@ -83,6 +92,26 @@ function Register() {
           placeholder="Teléfono"
           value={telefono}
           onChange={(e) => setTelefono(e.target.value)}
+          required
+        />
+
+        <br /><br />
+
+        <input
+          type="text"
+          placeholder="Ciudad"
+          value={ciudad}
+          onChange={(e) => setCiudad(e.target.value)}
+          required
+        />
+
+        <br /><br />
+
+        <input
+          type="text"
+          placeholder="Barrio o zona"
+          value={barrio}
+          onChange={(e) => setBarrio(e.target.value)}
         />
 
         <br /><br />
@@ -92,6 +121,7 @@ function Register() {
           placeholder="Correo"
           value={correo}
           onChange={(e) => setCorreo(e.target.value)}
+          required
         />
 
         <br /><br />
@@ -101,6 +131,7 @@ function Register() {
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <br /><br />
@@ -118,9 +149,7 @@ function Register() {
         <button type="submit">
           Registrarse
         </button>
-
       </form>
-
     </div>
   )
 }

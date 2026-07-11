@@ -11,14 +11,19 @@ import CreateRequest from '../pages/CreateRequest'
 import MyRequests from '../pages/MyRequests'
 import AvailableRequests from '../pages/AvailableRequests'
 import CreateQuote from '../pages/CreateQuote'
+import RequestQuotes from '../pages/RequestQuotes'
+import ProviderProfile from '../pages/ProviderProfile'
+import Navbar from '../components/Navbar'
 
 function AppRoutes() {
   return (
     <BrowserRouter>
+     <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/perfil" element={<Profile />} />
         <Route path="/crear-servicio" element={<CreateService />} />
         <Route path="/mis-servicios" element={<MyServices />} />
@@ -27,6 +32,8 @@ function AppRoutes() {
         <Route path="/mis-solicitudes" element={<MyRequests />} />
         <Route path="/solicitudes-disponibles" element={<AvailableRequests />} />
         <Route path="/cotizar/:id" element={<CreateQuote />} />
+        <Route path="/cotizaciones/:id" element={<RequestQuotes />} />
+        <Route path="/perfil-prestador/:id" element={<ProviderProfile />} />
       </Routes>
     </BrowserRouter>
   )

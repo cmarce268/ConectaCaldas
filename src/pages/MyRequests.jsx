@@ -51,6 +51,11 @@ function MyRequests() {
             <p>Dirección: {solicitud.direccion}</p>
             <p>Categoría: {solicitud.categorias?.nombre}</p>
             <p>Estado: {solicitud.estado}</p>
+            <button
+            onClick={() => window.location.href = `/cotizaciones/${solicitud.id}`}
+            >
+             Ver cotizaciones
+            </button>
           </div>
         ))
       )}
